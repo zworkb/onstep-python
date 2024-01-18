@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lx200"
+description = "lx200 protocol"
+license = { text = "GPL" }
+classifiers = ["Programming Language :: Python :: 3"]
+dynamic = ["version"]
+dependencies = ["pyserial"]
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
