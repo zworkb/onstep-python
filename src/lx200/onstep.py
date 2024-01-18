@@ -1,25 +1,14 @@
 # OnStep Telescope Controller interface
 
-import lx200.tty
-import lx200.sock
+from lx200.transport.transport import Transport
+from lx200.transport.tty import tty
+from lx200.transport.sock import sock
 import time
 from datetime import datetime
-
+      
 class onstep:
-  def __init__(self, port = '', host = ''):
-    self.host = host
-    self.port = port
-
-    # Check what mode we are in, serial USB or over TCP/IP
-    if self.host == '' and self.port != '':
-      self.scope = lx200.tty.tty(port=self.port)
-      self.scope.open()
-    else:
-      if port.isnumeric():
-        self.scope = lx200.sock.sock()
-        self.scope.connect(self.host, int(self.port))
-      else:
-        raise NonNumericPort
+  def __init__(self, transport: Transport):
+    self.scope = transport
 
     self.is_slewing = False
     self.is_tracking = False
@@ -56,7 +45,7 @@ class onstep:
     return self.recv_message()
 
   def set_send_wait(self, wait):
-    lx200.tty.send_wait = wait
+    tty.send_wait = wait
 
   def align(self, num_stars = 1):
     # Align command
