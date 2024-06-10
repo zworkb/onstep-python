@@ -80,8 +80,10 @@ class onstep:
         return self.scope.recv()
     
     def set_rate(self, rate):
+        print(f"!!set-rate  :R{rate}#")
         self.scope.send(f":R{rate}#")
-        return self.scope.recv()
+        print(f"!!set-rate sent  :R{rate}#")
+        # return self.scope.recv()
 
     def dump_status(self):
         self.update_status()
@@ -608,6 +610,7 @@ class onstep:
         self.scope.send(":Q#")
         return True
     
-    async def set_rate(self, rate):
-        self.scope.send(f":R{rate}#")
-        return self.scope.recv()
+    # async def set_rate(self, rate):
+    #     print(f"!set-rate  :R{rate}#")
+    #     self.scope.send(f":R{rate}#")
+    #     # return self.scope.recv()
