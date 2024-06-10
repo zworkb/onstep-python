@@ -607,3 +607,7 @@ class onstep:
         # Stop all movement
         self.scope.send(":Q#")
         return True
+    
+    async def set_rate(self, rate):
+        self.scope.send(f":R{rate}#")
+        return self.scope.recv()
