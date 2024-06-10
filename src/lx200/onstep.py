@@ -78,6 +78,10 @@ class onstep:
         # Send a string
         self.scope.send(string)
         return self.scope.recv()
+    
+    def set_rate(self, rate):
+        self.scope.send(f":R{rate}#")
+        return self.scope.recv()
 
     def dump_status(self):
         self.update_status()
@@ -527,6 +531,16 @@ class onstep:
         # Move back to home position
         self.update_status()
         self.scope.send(":hC#")
+        
+    def park(self):
+        # Park the telescope
+        self.update_status()
+        self.scope.send(":hP#")
+        
+    def unpark(self):
+        # Unpark the telescope
+        self.update_status()
+        self.scope.send(":hR#")
 
     def reset_home(self):
         # Reset, as if pointing to the home position
@@ -572,3 +586,24 @@ class onstep:
             return True
         else:
             return False
+        
+    def start_move(self, direction=""):
+        # Move in a certain direction
+        if direction == "n" or direction == "s" or direction == "w" or direction == "e":
+            self.scope.send(":M" + direction + "#")
+            return True
+        else:
+            return False
+        
+    def stop_move(self, direction=''):
+        # Stop moving in a certain direction
+        if direction == "n" or direction == "s" or direction == "w" or direction == "e":
+            self.scope.send(":Q" + direction + "#")
+            return True
+        else:
+            return False
+        
+    def stop_all(self):
+        # Stop all movement
+        self.scope.send(":Q#")
+        return True

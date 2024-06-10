@@ -17,6 +17,8 @@ You also need either or both of:
 Although this is written specifically for OnStep, it is mostly compatible with other telescope controllers
 that use the [LX200 Command Protocol](http://www.skymtn.com/mapug-astronomy/ragreiner/LX200Commands.html).
 
+OnStep commands are documented in the [OnStep Wiki](https://onstep.groups.io/g/main/wiki/23755).
+
 ## Configuration
 Before using this API, you need to edit the examples/config.py.
 A few required changes are needed in the examples/config.py:
